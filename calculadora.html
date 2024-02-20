@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        .calculator {
+            width: 350px;
+            margin: 50px auto;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            font-family: Arial, sans-serif;
+        }
+
+        .display {
+            width: calc(100% - 20px);
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 32px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+            text-align: right;
+            outline: none;
+        }
+
+        .buttons button {
+            width: calc(25% - 10px);
+            height: 60px;
+            margin: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .buttons button:hover {
+            background-color: #d0d0d0;
+        }
+
+        .buttons button:active {
+            background-color: #c0c0c0;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .buttons button.operator {
+            background-color: #ff9500;
+            color: #fff;
+        }
+
+        .buttons button.operator:hover {
+            background-color: #e68100;
+        }
+
+        .buttons button.operator:active {
+            background-color: #cc7200;
+        }
+
+        .buttons button.clear {
+            background-color: #ff3b30;
+            color: #fff;
+        }
+
+        .buttons button.clear:hover {
+            background-color: #e03025;
+        }
+
+        .buttons button.clear:active {
+            background-color: #cc2217;
+        }
+
+        .buttons button.equal {
+            background-color: #007aff;
+            color: #fff;
+        }
+
+        .buttons button.equal:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons button.equal:active {
+            background-color: #004799;
+        }
+
+        .buttons button.animation {
+            transition: transform 0.1s;
+        }
+
+        .buttons button.animation:hover {
+            transform: scale(1.1);
+        }
+
+        .buttons button.animation:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" disabled>
+        <div class="buttons">
+            <button onclick="appendToDisplay('7')" class="animation">7</button>
+            <button onclick="appendToDisplay('8')" class="animation">8</button>
+            <button onclick="appendToDisplay('9')" class="animation">9</button>
+            <button onclick="appendToDisplay('+')" class="operator animation">+</button>
+            <button onclick="appendToDisplay('4')" class="animation">4</button>
+            <button onclick="appendToDisplay('5')" class="animation">5</button>
+            <button onclick="appendToDisplay('6')" class="animation">6</button>
+            <button onclick="appendToDisplay('-')" class="operator animation">-</button>
+            <button onclick="appendToDisplay('1')" class="animation">1</button>
+            <button onclick="appendToDisplay('2')" class="animation">2</button>
+            <button onclick="appendToDisplay('3')" class="animation">3</button>
+            <button onclick="appendToDisplay('*')" class="operator animation">*</button>
+            <button onclick="appendToDisplay('0')" class="animation">0</button>
+            <button onclick="appendToDisplay('.')" class="animation">.</button>
+            <button onclick="clearDisplay()" class="clear animation">C</button>
+            <button onclick="calculate()" class="equal animation">=</button>
+            <button onclick="appendToDisplay('/')" class="operator animation">/</button>
+        </div>
+    </div>
+
+    <script>
+        let displayValue = '';
+
+        function appendToDisplay(value) {
+            displayValue += value;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.querySelector('.display').value = displayValue;
+        }
+
+        function clearDisplay() {
+            displayValue = '';
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                const result = eval(displayValue);
+                displayValue = result.toString();
+                updateDisplay();
+            } catch (error) {
+                displayValue = 'Error';
+                updateDisplay();
+            }
+        }
+    </script>
+</body>
+</html>
